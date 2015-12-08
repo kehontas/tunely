@@ -1,5 +1,5 @@
 // SERVER-SIDE JAVASCRIPT
-
+var db = require("./models");
 //require express in our app
 var express = require('express');
 // generate a new express app and call it 'app'
@@ -76,7 +76,12 @@ app.get('/api', function api_index (req, res){
 /**********
  * SERVER *
  **********/
-
+ app.get('/api/albums', function api_index (req, res) {
+ db.Album.find({}, function (err, Albums){
+  //console.log(Albums);
+  res.json(Albums);
+});
+});
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is running on http://localhost:3000/');
